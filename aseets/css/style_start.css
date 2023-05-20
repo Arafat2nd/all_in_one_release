@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,700;1,500&display=swap');
+/* font-family: 'Ubuntu', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
+
+/* font-family: 'Poppins', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+* {
+    padding: 0;
+    margin: 0;
+}
+a{
+    text-decoration: none !important;
+    color: white !important;
+    text-align: center !important;
+}
+:root {
+    --main-color: #2685FD;
+    --sec-color: #071117;
+    overflow-x: hidden !important;
+}
+
+.files,
+.data_user {
+    background-color: #fff;
+    background-image:
+    linear-gradient(90deg, transparent 79px, #2685fd 79px, #ffffff 41px, transparent 40px),
+    linear-gradient(#eee .1em, transparent .1em);
+    background-size: 100vh 1.2em;
+}
+body{
+    background-color: #fff;
+    background-image:
+    linear-gradient(90deg, transparent 79px, #2685fd 79px, #ffffff 41px, transparent 40px),
+    linear-gradient(#eee .1em, transparent .1em);
+    background-size: 100vh 1.2em;
+}
+.container {
+    width: 75% !important;
+    margin: auto;
+}
+
+
+.navbar {
+    background-color: var(--main-color) !important;
+}
+
+.navbar .wid {
+    width: 600px !important;
+    background-color: white;
+    color: black;
+    font-size: 18px !important;
+    border: 2.6px solid #2685FD;
+}
+
+.navbar .wid:focus {
+    color: white;
+    font-size: larger;
+    border: 1px solid white;
+    background-color: #2685FD;
+}
+
+@media only screen and (max-width: 920px) {
+    .navbar .wid {
+        width: fit-content !important;
+    }
+}
+
+.navbar ::placeholder {
+    color: #CB7E33 !important;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 500;
+    letter-spacing: 4px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    opacity: 1;
+    /* Firefox */
+}
+
+.navbar :focus::placeholder {
+    color: white !important;
+}
+
+.files {
+    background-color: white !important;
+}
+
+.files h2 {
+    font-size: 21px;
+    font-weight: 500;
+    padding: 10px 0;
+    user-select: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.files {
+    padding: 30px 0;
+}
+
+.files a i {
+
+    font-size: 120px;
+    font-family: Ubuntu, sans-serif;
+    width: 182px;
+    height: 210px;
+    line-height: 206px;
+    text-align: center;
+}
+
+.files .hword i {
+    border: 1px solid var(--main-color);
+    background-color: #ffffff;
+    opacity: 0.8;
+    background-size: 30px 30px;
+    background-image: repeating-linear-gradient(0deg, #2685FD, #2685FD 1.5px, #ffffff 1.5px, #ffffff);
+    color: #2685FD;
+}
+
+a,
+a:hover,
+a:visited,
+a:active {
+    text-decoration: none;
+}
+
+.files i {
+    transition: .3s;
+}
+
+.files a:hover i {
+    font-size: 140px;
+    font-weight: 300;
+    transform: scale(1.09);
+    box-shadow: 10px 0 100px rgba(44, 43, 43, 0.2);
+}
+
+.files .hexcel i {
+    border: 1px solid #107c41;
+    color: #107C41;
+    background-color: #ffffff;
+    opacity: 0.8;
+    background-image: linear-gradient(#107C41 1.8px, transparent 1.8px), linear-gradient(to right, #107C41 1.8px, #ffffff 1.8px);
+    background-size: 36px 36px;
+}
+
+
+
+.form{
+    margin-top: -15px !important;
+}
+
+h1 {
+    color: #fffffd !important;
+    font-size: 20px !important;
+    width: 100%;
+    line-height: 35px !important;
+    text-align: center !important;
+    margin-top: 20px !important;
+    user-select: none !important;
+    font-family: 'Poppins', sans-serif !important;
+    margin: auto;
+}
+
+.name {
+    color: #2685FD;
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+input{
+    margin-top: 25px !important;
+    outline: none ;
+    background-color: white;
+    color: #2685FD !important;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+    input::placeholder{
+    color: #2685FD !important;
+}
+
+input[type=submit]{
+    text-align: center;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+    border: none;
+    outline: none;
+    padding:10px 30px;
+    border-radius: 30px;
+    transition: .2s;
+    background-color: #CB7E33;
+    border: none;
+    color: white !important;
+}
+input[type=submit]:hover{
+    background-color: white !important;
+    color: #2685FD !important;
+    font-size: 20px !important;
+}
+.containerd{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0,.3);
+}
+.containerdd{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin-right: 10% !important;
+    height: fit-content;
+    width:350px !important;
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 50px;
+    background-image: linear-gradient(to top, #2685FD, #2685FD, #2685FD);
+    /* background-color: transparent; */
+    filter: blur(.40px);
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    transition: .15s;
+}
+@media only screen and (max-width: 890px) {
+    /* .containerdd{
+        left: 15% !important;
+        height: 80%;
+        padding: 0 40px;
+    } */
+    
+}
+.new_Ww{
+    margin-top: 50px !important;
+}
+.inh{
+    justify-content: space-evenly;
+}
+.names{
+    padding: 7px;
+}
+.names:hover{
+    border: 1.5px solid white;
+}
+.log_Out{
+    font-size: 15px;
+    font-weight: 500;
+    color: #2685FD !important;
+    font-size: 17px !important;
+}
+.log_Out:hover{
+    color:white !important;
+    background-color: #2685FD !important;
+}
+.Calend{
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 20px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
+    border-radius: 10px;
+    padding: 5px 20px;
+    cursor: pointer !important;
+    transition: .8s;
+}
+.Calend:hover{
+    border:1.5px solid #fffffd;
+}
+html,
+body {
+    width: 100%;
+    overflow-x: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+    
+}

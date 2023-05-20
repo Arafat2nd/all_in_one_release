@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Word</title>
+    <link rel="website icon" type="png" href="../aseets/images/LogoMakr-dd-fotor-bg-remover-20230513153029.png">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://cdn.tiny.cloud/1/hxefts4aaky7uxlocdszi6ujhl8k9f5azo5n1xxx7sc61dn4/tinymce/6/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+<script src="real_time.js" type="module"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            height: 100vh;
+            width: 100vw;
+            margin: auto;
+            transform: translate(-50%, -50%);
+            z-index: 4000;
+            border-radius: 20px;
+        }
+
+        .file_name {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(38, 133, 253,.32);
+            padding: 50px !important;
+            padding-bottom: 40px !important;
+            margin: auto;
+            border-radius: 20px;
+        }
+
+        .file_name input {
+            outline: none;
+            padding: 20px 20px;
+            border-radius: 10px;
+            font-size: 20px;
+            text-align: left;
+            border: 2px solid #2685FD;
+        }
+
+        ::placeholder {
+            font-size: 17px;
+            text-align: center;
+            color: black;
+            letter-spacing: 5px;
+        }
+
+        .btn {
+            margin: 15px;
+            margin-left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 15px;
+            background-color: #2685FD;
+            border: none;
+            border-radius: 15px;
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 30px !important;
+        }
+        
+.loader {
+    animation: rotate 1s infinite;
+    height: 50px;
+    width: 50px;
+    transform: scale(1.4) !important;
+}
+
+.loader:before,
+.loader:after {
+    content: "";
+    display: block;
+    height: 20px;
+    width: 20px;
+}
+
+.loader:before {
+    animation: box1 1s infinite;
+    background-color: #fff;
+    box-shadow: 30px 0 0 #ff3d00;
+    margin-bottom: 10px;
+}
+
+.loader:after {
+    animation: box2 1s infinite;
+    background-color: #ff3d00;
+    box-shadow: 30px 0 0 #fff;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg) scale(0.8)
+    }
+
+    50% {
+        transform: rotate(360deg) scale(1.2)
+    }
+
+    100% {
+        transform: rotate(720deg) scale(0.8);
+    }
+}
+
+@keyframes box1 {
+    0% {
+        box-shadow: 30px 0 0 #ff3d00;
+    }
+
+    50% {
+        box-shadow: 0 0 0 #ff3d00;
+        margin-bottom: 0;
+        transform: translate(15px, 15px);
+    }
+
+    100% {
+        box-shadow: 30px 0 0 #ff3d00;
+        margin-bottom: 10px;
+    }
+}
+
+@keyframes box2 {
+    0% {
+        box-shadow: 30px 0 0 #fff;
+    }
+
+    50% {
+        box-shadow: 0 0 0 #fff;
+        margin-top: -20px;
+        transform: translate(15px, 15px);
+    }
+
+    100% {
+        box-shadow: 30px 0 0 #fff;
+        margin-top: 0;
+    }
+}
+
+.loadere {
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    z-index: 9000;
+    background: url(../aseets/images/SpaceBg.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+    </style>
+
+</head>
+<script>
+    let current=''
+</script>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+    import { getFirestore,doc,addDoc,setDoc,collection,onSnapshot   } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyBNk2maGCUh4NnLhV3mKvMpTmx5uYkcH-g",
+        authDomain: "all-in-one-aio.firebaseapp.com",
+        databaseURL: "https://all-in-one-aio-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "all-in-one-aio",
+        storageBucket: "all-in-one-aio.appspot.com",
+        messagingSenderId: "752140232690",
+        appId: "1:752140232690:web:3050f7cc5947a4be0d6d6b"
+    };
+    const app = await initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let xhr6 = new XMLHttpRequest();
+    xhr6.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/fetch_current.php", true);
+    xhr6.setRequestHeader("Content-Type", "application/json");
+
+    xhr6.onreadystatechange = function () {
+        if (xhr6.readyState === XMLHttpRequest.DONE) {
+            if (xhr6.status === 200) {
+                const documentPath = xhr6.responseText;
+                const docRef = doc(db, "docs", documentPath);
+
+                const realTimeListener = onSnapshot(docRef, (doc) => {
+                    const editor = tinymce.get('myTextarea');
+                    editor.setContent(doc.data()['text']);
+                    console.log(doc.data()['text']);
+                });
+            } else {
+                console.error('Request failed with status:', xhr6.status);
+            }
+        }
+    };
+
+    xhr6.send(JSON.stringify({}));
+
+</script>
+<script type="module">
+    import {updateReal} from './real_time.js';
+let flag= false;
+         let xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/fetch_current.php", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify({}));
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.responseText!="nope") {
+                    document.querySelector("#crt").remove();
+                    current=xhr.responseText;
+                    flag=true;
+                    tinymce.init({id:"main",
+                        init_instance_callback: function(editor) {
+                            if (flag){
+                                let xhr1 = new XMLHttpRequest();
+                                xhr1.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/fetch_content.php", true);
+                                xhr1.setRequestHeader("Content-Type", "application/json");
+                                xhr1.send(JSON.stringify({}));
+                                xhr1.onreadystatechange = function () {
+                                    if (xhr1.readyState === XMLHttpRequest.DONE) {
+                                        console.log(xhr1.responseText)
+                                        if (xhr1.responseText!="nope") {
+                                            editor.setContent(xhr1.responseText)
+                                        }
+
+                                    }
+                                }
+                            }
+                        },
+                        setup:async function (editor){
+
+                            editor.on('change', async  function () {
+                              await  updateReal(current,editor.getContent())
+                                let xhr1 = new XMLHttpRequest();
+                                xhr1.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/set_content.php", true);
+                                xhr1.setRequestHeader("Content-Type", "application/json");
+                                xhr1.send(JSON.stringify({"content":editor.getContent()}));
+                                xhr1.onreadystatechange = function () {
+                                    if (xhr1.readyState === XMLHttpRequest.DONE) {
+                                        return'';
+                                    }
+
+                                }                            });
+                        },
+                        selector: 'textarea',
+                        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                        tinycomments_mode: 'embedded',
+                        tinycomments_author: 'Author name',
+                        mergetags_list: [
+                            { value: 'First.Name', title: 'First Name' },
+                            { value: 'Email', title: 'Email' },
+                        ],
+                    });
+
+                } else {
+
+
+                    tinymce.init({
+                        id:"main",
+                        init_instance_callback: function(editor) {
+                        },
+                        setup:async  function (editor){
+                            editor.on('change', async function () {
+                                await updateReal(current, editor.getContent())
+                                let xhr1 = new XMLHttpRequest();
+                                xhr1.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/set_content.php", true);
+                                xhr1.setRequestHeader("Content-Type", "application/json");
+                                xhr1.send(JSON.stringify({"content": editor.getContent()}));
+                                xhr1.onreadystatechange = function () {
+                                    if (xhr1.readyState === XMLHttpRequest.DONE) {
+                                        return '';
+                                    }
+
+                                }
+
+                            });
+
+
+                        },
+                        selector: 'textarea',
+                        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                        tinycomments_mode: 'embedded',
+                        tinycomments_author: 'Author name',
+                        mergetags_list: [
+                            { value: 'First.Name', title: 'First Name' },
+                            { value: 'Email', title: 'Email' },
+                        ],
+                    });
+
+                }
+
+            }
+    }
+
+
+
+</script>
+<script type="module">
+    import {addReal} from "./real_time.js"
+    async function createFile() {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/create_doc.php", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify({"title": document.querySelector("#file_name").value,"request":"new"}));
+        xhr.onreadystatechange = async function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                console.log(xhr.responseText)
+                if (xhr.responseText.split(',')[0] === "created") {
+                    document.querySelector("#crt").remove();
+                    current = xhr.responseText.split(',')[1];
+                    await addReal(current);
+                }
+
+            }
+        }
+
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Code that depends on the DOM being fully loaded
+        let googleBtn = document.querySelector('#new_file');
+        googleBtn.addEventListener('click', createFile);
+    });
+
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let share=document.querySelector("#addmail")
+        share.addEventListener('click', addMail);
+    });
+    function addMail(){
+        let mail=document.querySelector("#share_mail").value;
+        let xhr5 = new XMLHttpRequest();
+        xhr5.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/share_doc.php", true);
+        xhr5.setRequestHeader("Content-Type", "application/json");
+        xhr5.send(JSON.stringify({"email":mail}));
+        xhr5.onreadystatechange = function () {
+            if (xhr5.readyState === XMLHttpRequest.DONE) {
+                if (xhr5.responseText==="success"){
+                    Swal.fire({
+                        title: "Added "+mail+"successfully",
+                        text: "You can now work on this document with them",
+                        icon: "success",
+                        button: "OK",
+                    });
+
+                }
+
+            }
+        }
+    }
+
+</script>
+<body>
+
+    <div class="loadere">
+        <span class="loader"></span>
+        <div style="margin-left: 15px; font-size: 45px; color: white; font-family: 'Bruno Ace', cursive;">ALL <b style="color: #ff3d00; font-size: 33px;">in</b> ONE</div>
+</div>
+    <div class="overlay" id="crt">
+        <div class="file_name">
+                <input type="text" id="file_name" placeholder="File Name" class="name_file" />
+                <button class="btn" id="new_file" style="display: block;">Create File</button>
+
+        </div>
+    </div>
+
+    <textarea id="myTextarea">
+
+    </textarea>
+    <button class="share_f" style="position: absolute; top: 20px; right: 20px; z-index: 4000; background-color: white;border-radius: 15px; padding:10px 20px; border: none;"> SHARE</button>
+    <div class="E-mail" style="padding: 10px 40px; border-radius: 15px;  background-color: #2685FD; position: absolute; top: 11%; right: 1%; z-index: 4000; display: none;">
+        <h2  style="display: inline-block; color: aliceblue; font-size: 18px; ">Please Enter Email</h2> <span class="close" style="display: inline-block; margin-left: 10px; cursor: pointer; color:#2685FD; background-color: white; padding: 8px; border-radius: 8px;">Close</span>
+        <input type="email" id="share_mail" placeholder="E-mail" style="display: block; padding: 10px; border-radius: 10px; margin-top: 5px; margin-bottom: 5px; border: none; outline: #2685FD;">
+        <div>
+            <button id="addmail" style=" color: #2685FD; background-color: white;border-radius: 15px; padding:10px 20px; border: none;">Share</button>
+        </div>
+    </div>
+
+
+
+    <script>
+        let btn=document.querySelector('.share_f');
+        let ema=document.querySelector('.E-mail');
+        let close=document.querySelector('.close')
+        btn.addEventListener('click',function(){
+            ema.style.display='block';
+        })
+        close.addEventListener('click',function(){
+            ema.style.display='none';
+        })
+
+        let loading=document.querySelector('.loadere')
+        document.body.style.overflowY='hidden'
+        window.addEventListener('load',function(){
+        this.setTimeout(function(){
+        loading.style.opacity='0';
+        loading.style.transition='1s'
+        loading.style.visibility='hidden'
+        document.body.style.overflowY='visible'
+        },2000)
+})
+    </script>
+
+
+
+
+
+</body>
+
+</html>

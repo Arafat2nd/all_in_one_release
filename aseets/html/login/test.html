@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div class="slider-container">
+  <div class="slider">
+    <!-- Cards will be dynamically added here -->
+  </div>
+</div>
+<button id="add-card-btn">Add Card</button>
+
+<script>
+  let sliderContainer = document.querySelector('.slider');
+  let addCardBtn = document.getElementById('add-card-btn');
+  let cardIndex = 1;
+
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/cards.php", true);
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.send(JSON.stringify({}));
+
+  xhr.onreadystatechange = function (event) {
+    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+      console.log(xhr.responseText);
+      let response = xhr.responseText;
+      let docs = response.split(",");
+
+      for (let i = 0; i < docs.length; i++) {
+        let doc = docs[i];
+        if (doc.trim() === '') {
+          continue; // Skip empty doc
+        }
+        let cardData = doc.split('~').map(item => item.trim());
+        let newCard = document.createElement('div');
+        newCard.innerHTML = newCard.innerHTML = `
+<div id="card-button${cardData[1]}" style="width: 200px; cursor: pointer; height: 150px; background-color: #2685fd; text-align: center; box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;">
+  <img src="../../images/888883.png" width="30%" style="color: white; margin: auto; margin-top: 10px; margin-bottom: 10px;" alt="">
+  <h3 class="title" style="color: #fdfdfd; font-size: 20px; font-family: Georgia, 'Times New Roman', Times, serif; margin-top: 25px;">${cardData[0]}</h3>
+</div>
+`;
+
+
+        let script = document.createElement('script');
+        script.textContent = `
+          let button${cardData[1]} = document.querySelector('#card-button${cardData[1]}');
+          button${cardData[1]}.addEventListener('click', () => {
+            console.log("Button in Card ${cardData[1]} clicked.");
+            // Other event handling code...
+          });
+        `;
+
+        newCard.appendChild(script);
+        newCard.classList.add('card');
+        sliderContainer.appendChild(newCard);
+        sliderContainer.style.width = `${cardIndex * 310}px`;
+
+        cardIndex++;
+      }
+    }
+  };
+</script>
+
+</body>
+</html>

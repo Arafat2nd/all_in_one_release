@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All in One</title>
+    <link rel="website icon" type="png" href="aseets/images/LogoMakr-dd-fotor-bg-remover-20230513153029.png">
+    <link rel="stylesheet" href="aseets/css/style.css"> <!-- css file -->
+    <link rel="stylesheet" href="vendor/css/all.min.css"> <!-- icons -->
+    <link rel="stylesheet" href="vendor/css/bootstrap.min.css"> <!-- bootstrap css -->
+    <style>
+        .sidebar-menu{
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 350px;
+            background-color: #0766db;
+            z-index: 3;
+            transform: translateX(100%);
+            border-bottom-left-radius: 215px;
+            transition: 0.5s ease transform;
+        }
+        body.sidebar-open .sidebar-menu{
+            transform: translateX(0);
+            transition: 0.5s ease transform;
+        }
+        .close-menu-button{
+            background-color: transparent;
+            color: white;
+            border: none;
+            font-size: 40px;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+        /* .page-content{
+            transform: translateX(0) ;
+        }  */
+        body.sidebar-open .page-content{
+            transform: translateX(-350px);
+        } 
+        .sidebar-menu span,.sidebar-menu i{
+            color: white;
+            font-size: 25px;
+            margin-left: 10px !important;
+        } 
+        .sidebar-menu li:hover i{
+            color: #CB7E33;
+        } 
+        .sidebar-menu li:hover span{
+            color: #CB7E33;
+        } 
+    </style>  
+</head>
+
+<body>
+<div class="loadere">
+        <span class="loader"></span>
+        <div style="margin-left: 15px; font-size: 45px; color: white; font-family: 'Bruno Ace', cursive;">ALL <b style="color: #ff3d00; font-size: 33px;">in</b> ONE</div>
+</div>
+<div class="sidebar-menu">
+    
+            <button class="close-menu-button">
+                <i class="fa-solid fa-xmark close_btn"></i>
+            </button>
+            <ul class="new_item d-flex flex-column g-5 align-content-center flex-wrap justify-content-around ">
+                <li class="" style="margin-top: 80px;"><a href="#nav_header"><i class="fa-solid fa-house first"></i><span>Home</span></a></li>
+                <li class="" style="margin-top: 50px;"><a href="#about"><i class="fa-regular fa-address-card"></i> <span>About us</span></a></li>
+                <li class="" style="margin-top: 50px;"><a href="#services"><i class="fa-solid fa-gear"></i> <span>Services</span></a></li>
+                <li class="" style="margin-top: 50px;"><a href="#Team"> <i class="fa-solid fa-people-group"></i> <span>Team</span></a></li>
+                <li class="" style="margin-top: 50px;"><a href="#contact"><i class="fa-solid fa-envelope"></i> <span>Contact</span></a></li>
+                <li class="" style="margin-top: 50px;"><a href="aseets/html/login/log_in.html" target="_blank"><i class="fa-solid fa-right-to-bracket"></i> <span>Get Started</span></a></li>
+            </ul>
+        
+</div> 
+<div class="page-content">
+    
+    <div class="arrowup" style="transition: .3s; position: fixed; bottom: 20px; left: 20px; z-index: 8000;">
+        <i  style="font-size: 20px; width: 50px; height: 50px; line-height: 50px; text-align: center;background: rgb(7,102,219);
+        background: linear-gradient(157deg, rgba(7,102,219,1) 79%, rgba(16,124,65,1) 9%);   color: azure; cursor: pointer; border-radius: 50%;" class="fa-solid fa-arrow-up"></i>
+    </div>
+    <!-- start nav and header -->
+    <div class="nav_header" id="nav_header">
+        <div class="img">
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <button class="border-0 bg-transparent display-4 close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="container">
+                    <a class="navbar-brand" href="index.html"><img src="aseets/images/LogoMakr-5ezGBx.png" alt=""></a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto  items mb-2 mb-lg-0">
+                            <li class="nav-item "><a class="nav-link scrollto   mx-3 px-0 "  href="#">Home</a></li>
+                            <li class="nav-item "><a class="nav-link scrollto mx-3 px-0"  href=" #about">About us</a>
+                            </li>
+                            <li class="nav-item "><a class="nav-link scrollto  mx-3 px-0"  href=" #services">Services</a>
+                            </li>
+                            <li class="nav-item "><a class="nav-link scrollto  mx-3 px-0"  href=" #Team">Team</a></li>
+                            <li class="nav-item "><a class="nav-link scrollto mx-3  px-0"  href=" #contact">Contact</a>
+                            </li>
+                            <li class="nav-item "><a class=" nav-link last getstarted scrollto  px-0 mx-3"
+                                    href="aseets/html/login/log_in.html" target="_blank">Get Started</a></li>
+                        </ul>
+                    </div>
+
+                    <button type="button" class="burger_line">
+                        <div class="line1"></div>
+                        <div class="line2"></div>
+                        <div class="line3"></div>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- start header -->
+            <header class="header" >
+                <div class="container-x">
+                    <div class="row ">
+                        <div class=" position-relative header-content1 order-2 order-lg-1 effect ">
+                                <h1 class="marg ">
+                                    <span >
+                                        Streamline Your
+                                        <hy>
+                                            Workflow and Efforts
+                                        </hy>
+                                    </span>
+                                    <u>
+                                        <g class="cust_tex">
+                                            LIMITLESS
+                                        </g>
+                                    </u>
+                                </h1>
+                            
+                        
+                            <div class="lists">
+                                <ul>
+                                    <li class="px-1">Access,</li>
+                                    <li class="px-1">Edit,</li>
+                                    <li class="px-1">and</li>
+                                    <li class="px-1">Share</li>
+                                    <li class="p-1">Documents</li>
+                                    <li class="p-1">Anytime</li>
+                                    <!-- <li class="p-1"> Anywhare</li> -->
+                                </ul>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </header>
+            <!-- end header -->
+        </div>
+    </div>
+    <!-- end nav and header -->
+
+    <!-- start about -->
+    <div id="about" class="about" >
+        <div class="container">
+            <h2 class="text-center mb-5 hiddeeen">About us</h2>
+            <div class="row mt-3">
+                <div class="col-md-7 order-1 order-lg-1 sliders hiddeen ">
+                    <div style="background-image: url(aseets/images/banner-man.png); width: 100%;"></div>
+                    <div style="background-image: url(aseets/images/illustration-2.png); width: 100%; "></div>
+                    <div style="background-image: url(aseets/images/s1.151983fb72d7cec8535a.png); width: 100%;"></div>
+                </div>
+                <br> <br>
+                <div class="col-md-5 order-2 order-lg-2 sec_item hiddeeen">
+                    <h2 class="heading_about">ALL in ONE is a web-based platform that allows users to <strong> create,
+                            modify and
+                            share text files in a
+                            simple and efficient way </strong>
+                    </h2>
+                    <div class="details">
+                        <p class="para_about">ALL in ONE offers a range of features and functionality to help users
+                            create, edit, and share
+                            their text files. Some of the key features of All in One include:</p>
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item " style="margin-bottom: 20px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed newcolor" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false"
+                                        aria-controls="collapseOne">
+                                        <span class="pe-2">01 </span> Easy-to-use interface
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        All in One interface is simple and intuitive, making it easy for users to create
+                                        and edit text files without any technical knowledge.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item " style="margin-bottom: 20px;">
+                                <h2 class="accordion-header">
+
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        <span class="pe-2">02 </span>Real-time collaboration
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        Users can share their text files with others, allowing multiple people to edit
+                                        and work on the same document in real-time.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item " style="margin-bottom: 20px;">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        <span class="pe-2">03 </span> Security
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        All in One uses state-of-the-art security measures to protect user data,
+                                        including encryption and two-factor authentication.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+    <!-- end about -->
+
+    <!-- start services -->
+
+    <div id="services" class="services position-relative" >
+        <h2 class="text-center hiddeen ">Our services</h2>
+        <p class="text-center para hiddeeen">We offer our users these services, and we always strive to satisfy them</p>
+        <div class="containerser">
+            <!-- 2685FD -->
+            <div class="box hidden" style="--clr:#0766db;">
+                <div class="content">
+                    <div class="icon">
+                        <i class="fa-solid fa-file-word"></i>
+                    </div>
+                    <div class="txt">
+                        <h3>
+                            Word
+                        </h3>
+                        <p>Create, edit, and format documents, online in real-time. <br> Share files with other users
+                            and allow them to collaborate on the same document simultaneously.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box hidden" style="--clr:#107C41;">
+                <div class="content">
+                    <div class="icon">
+                        <i class="fa-solid fa-file-excel"></i>
+                    </div>
+                    <div class="txt">
+                        <h3>
+                            Excel
+                        </h3>
+                        <p>Create, edit, and format documents, online in real-time. <br> Access and edit documents from
+                            anywhere, using any device with an internet connection.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="box hidden" style="--clr:#CB7E33;">
+                <div class="content">
+                    <div class="icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </div>
+                    <div class="txt">
+                        <h3>
+                            Calendar
+                        </h3>
+                        <p>
+                            The ability to create, view, and edit events online, set reminders and receive notifications
+                            for upcoming events, and share calendars with other users.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="Team" class="team text-center position-relative user-select-none" >
+        <div class="container">
+            <div class="d-flex justify-content-center py-2">
+                <div class="title position-relative mb-2">
+                    <h2 class=" global pt-2 hiddeen ">Our Happy Team</h2>
+                    <p class="hiddeeen">We are pleased to have a distinguished team working in programming and developing
+                        websites. <br> They have worked on this site with pleasure and love to make it unique and easy
+                        to use.</p>
+                </div>
+            </div>
+
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-inner">
+                        <div class=" row  d-flex align-content-center justify-content-evenly text-center">
+                            <div class="col-md-3 px-0 mx-3 pt-4 mt-2 boxx-hov hidden ">
+                                <img src="aseets/images/sohaib-photoaidcom-cropped (1).jpg" width="40%" alt="...">
+                                <h6 class="mt-3">Sohaib T. Arafat</h6>
+                                <p class="mb-3">Team Lead Software Developer </p>
+                            </div>
+                            <div class="col-md-3 px-0 mx-3 pt-4 mt-2 boxx-hov hidden ">
+                                <img src="aseets/images/mahmoud-photoaidcom-cropped.jpg" width="40%" alt="...">
+                                <h6 class="mt-3">Mahmoud N. Barmawi</h6>
+                                <p class="mb-3">Front-End Developer</p>
+                            </div>
+                            <div class="col-md-3 px-0 mx-3  pt-4 mt-2  boxx-hov  hidden ">
+                                <img src="aseets/images/pexels-photo-220453 (1)-photoaidcom-cropped.jpg"  width="40%" alt="...">
+                                <h6 class="mt-3">jod B. ali</h6>
+                                <p class="mb-3">Back-End Developer</p>
+
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end team -->
+    <!-- start conact -->
+    <div id="contact" class="contact" >
+        <div class="container">
+
+            <div class="section-title text-center mt-5 mb-4">
+                <h2 class="mt-5">Contact</h2>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-5 d-flex align-items-stretch">
+                    <div class="info">
+                        <div class="address">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <h4>Location:</h4>
+                            <p>Nablus, Academy Street</p>
+                        </div>
+
+                        <div class="email">
+                            <i class="fa-regular fa-envelope"></i>
+                            <h4>Email:</h4>
+                            <a href="mailto:barmawi@arfat.com" class="ms-3">barmawi@arfat.com</a>
+                        </div>
+
+                        <div class="phone">
+                            <i class="fa-solid fa-phone"></i>
+                            <h4>Call:</h4>
+                            <a href="tel:+970 59 0 001 100" class="ms-3">+970 59 0 001 100</a>
+                        </div>
+
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
+                            frameborder="0" style="border:0; width: 100%; height: 290px; margin-top: 5px;"
+                            allowfullscreen></iframe>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
+                    <!-- action="forms/contact.php" method="post" role="form" -->
+                    <form class="php-email-form">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="name">Your Name</label>
+                                <input type="text" name="name" class="form-control" id="name" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="name">Your Email</label>
+                                <input type="email" class="form-control" name="email" id="email" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Subject</label>
+                            <input type="text" class="form-control" name="subject" id="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Message</label>
+                            <textarea class="form-control" name="message" rows="10" required></textarea>
+                        </div>
+
+                        <div class="text-center"><button type="submit">Send Message</button></div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div><!-- End Contact Section -->
+    <!-- start footer -->
+    <footer id="footer" class="footer">
+        <div class="waves">
+            <div class="wave" id="wave1"></div>
+            <div class="wave" id="wave2"></div>
+            <div class="wave" id="wave3"></div>
+            <div class="wave" id="wave4"></div>
+        </div>
+        <div class="footer-top ">
+            <div class="container">
+                <div class="row ">
+
+                    <div class="col-lg-3 col-md-6   footer-contact">
+                        <h3>All in One</h3>
+                        <p>
+                            Nablus, Academy Street
+                            <br> <br>
+                            <strong>Phone:</strong> <a href="tel:+970 59 0 001 100" style="color: white;">+970 59 0 001
+                                100</a>
+                            <br> <br>
+                            <strong>Email:</strong> <a href="mailto:barmawi@arfat.com"
+                                style="color: white;">barmawi@arfat.com</a>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6  footer-links">
+                        <h4>Useful Links</h4>
+                        <ul class="lins">
+                            <li><i class="fa-solid fa-arrow-right mx-2"></i> <a href="#nav_header">Home</a></li>
+                            <li><i class="fa-solid fa-arrow-right mx-2"></i> <a href="#about">About us</a></li>
+                            <li><i class="fa-solid fa-arrow-right mx-2"></i> <a href="#services">Services</a></li>
+                            <li><i class="fa-solid fa-arrow-right mx-2"></i> <a href="#Team">Team</a></li>
+                            <li><i class="fa-solid fa-arrow-right mx-2"></i> <a href="#Contact">Contact</a></li>
+                        </ul>
+                    </div>
+
+
+                    <div class="col-lg-3 col-md-6  footer-links">
+                        <h4>Our Social Networks</h4>
+                        <p class="footpara">You can find everything new to us on our websites</p>
+                        <div class="social-links mt-3">
+                            <a href="https://twitter.com" target="_blank" class="twitter"><i class="fa-brands fa-twitter ico"></i></a>
+                            <a href="https://facebook.com" target="_blank" class="facebook"><i class="fa-brands fa-facebook ico"></i></a>
+                            <a href="https://instagram.com" target="_blank" class="instagram"><i class="fa-brands fa-instagram ico"></i></a>
+                            <a href="https://linkedin.com" target="_blank" class="linkedin"><i class="fa-brands fa-linkedin ico"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="image col-lg-2 col-md-6 ">
+                        <a href="index.html" class="mx-5"> <img src="aseets/images/LogoMakr-5ezGBx.png" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container text-center footer-bottom ">
+            <div class="copyright text-center">
+                &copy; Copyright <strong><span>All in One</span></strong>. All Rights Reserved
+            </div>
+        </div>
+    </footer><!-- End footer -->
+
+</div>
+    <script src="aseets/js/main.js"> </script>
+    <script src="vendor/js/bootstrap.bundle.min.js"></script> <!-- bootstrap JS -->
+</body>
+
+</html>
+

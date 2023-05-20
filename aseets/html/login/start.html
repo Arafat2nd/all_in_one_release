@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word</title>
+    <link rel="website icon" type="png" href="../../images/LogoMakr-dd-fotor-bg-remover-20230513153029.png">
+    <link rel="stylesheet" href="../../../vendor/css/all.min.css"> <!-- icons -->
+    <link rel="stylesheet" href="../../../vendor/css/bootstrap.min.css"> <!-- bootstrap css -->
+    <link rel="stylesheet" href="../../../vendor/js/sweetalert2.min.css">
+    <link rel="stylesheet" href="../../css/style_start.css"> <!-- css file -->
+    <script type="module" src="../../js/main_page.js"></script>
+<script type="text/javascript"></script>
+</head>
+<style>
+
+    #cCarousel {
+        position: relative;
+        max-width: 90% !important;
+        margin: auto;
+
+    }
+
+    #cCarousel .arrow {
+        position: absolute;
+        top: 50%;
+        display: flex;
+        width: 45px;
+        height: 45px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        z-index: 1;
+        font-size: 26px;
+        color: white;
+        background: #f45815;
+        cursor: pointer;
+    }
+    #cCarousel .ar1{
+        left: -50px !important;
+        transform: scale(.8);
+    }
+    #cCarousel .ar2{
+        right: -50px !important;
+        transform: scale(.8);
+
+    }
+    #cCarousel #prev {
+        left: 0px;
+    }
+
+    #cCarousel #next {
+        right: 0px;
+    }
+
+    #carousel-vp {
+        width: 100% !important;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        margin: auto;
+    }
+
+    @media (max-width: 770px) {
+        #carousel-vp {
+            width: 510px;
+        }
+    }
+
+    @media (max-width: 510px) {
+        #carousel-vp {
+            width: 250px;
+        }
+    }
+
+    #cCarousel #cCarousel-inner {
+        display: flex;
+        position: absolute;
+        transition: 0.3s ease-in-out;
+        gap: 10px;
+        left: 0px;
+    }
+
+    .cCarousel-item {
+        width: 250px;
+        height: 365px;
+        border: 2px solid ;
+        border-radius: 15px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cCarousel-item img {
+        width: 100%;
+        object-fit: cover;
+        min-height: 246px;
+        color: white;
+    }
+
+    .cCarousel-item .infos {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        background: #2685fd;
+        color: #fdfdfd;
+    }
+
+    .cCarousel-item .infos button {
+        background: #fdfdfd;
+        padding: 10px 30px;
+        border-radius: 15px;
+        border: none !important;
+        color: #2685FD;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    .loader {
+        animation: rotate 1s infinite;
+        height: 50px;
+        width: 50px;
+        transform: scale(1.4) !important;
+    }
+
+    .loader:before,
+    .loader:after {
+        content: "";
+        display: block;
+        height: 20px;
+        width: 20px;
+    }
+
+    .loader:before {
+        animation: box1 1s infinite;
+        background-color: #fff;
+        box-shadow: 30px 0 0 #ff3d00;
+        margin-bottom: 10px;
+    }
+
+    .loader:after {
+        animation: box2 1s infinite;
+        background-color: #ff3d00;
+        box-shadow: 30px 0 0 #fff;
+    }
+
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg) scale(0.8)
+        }
+
+        50% {
+            transform: rotate(360deg) scale(1.2)
+        }
+
+        100% {
+            transform: rotate(720deg) scale(0.8);
+        }
+    }
+
+    @keyframes box1 {
+        0% {
+            box-shadow: 30px 0 0 #ff3d00;
+        }
+
+        50% {
+            box-shadow: 0 0 0 #ff3d00;
+            margin-bottom: 0;
+            transform: translate(15px, 15px);
+        }
+
+        100% {
+            box-shadow: 30px 0 0 #ff3d00;
+            margin-bottom: 10px;
+        }
+    }
+
+    @keyframes box2 {
+        0% {
+            box-shadow: 30px 0 0 #fff;
+        }
+
+        50% {
+            box-shadow: 0 0 0 #fff;
+            margin-top: -20px;
+            transform: translate(15px, 15px);
+        }
+
+        100% {
+            box-shadow: 30px 0 0 #fff;
+            margin-top: 0;
+        }
+    }
+
+    .loadere {
+        position: fixed;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        z-index: 9000;
+        background: url(../../images/SpaceBg.gif);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<body>
+
+    <!-- <div class="loadere">
+        <span class="loader"></span>
+        <div style="margin-left: 15px; font-size: 45px; color: white; font-family: 'Bruno Ace', cursive;">ALL <b style="color: #ff3d00; font-size: 33px;">in</b> ONE</div>
+    </div> -->
+    <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid" style="width: 95% !important;">
+            <div class="d-flex align-items-center inh w-100 ">
+                <a class="navbar-brand d-block" href="#"><img src="../../images/LogoMakr-5ezGBx.png" alt=""></a>
+                <!-- <p class="mt-3" style="font-weight: bolder;"></p> -->
+                <a href="../../html/login/test.html"  class="Calend  d-inline-block ms-auto me-4" >Calendar</a>
+                <li class="nav-item dropdown ms-3 " style="list-style-type: none !important; ">
+                    <a class="nav-link dropdown-toggle names" id="user_info" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="font-weight: 500;">
+                        Mahmoud Barmawi
+                    </a>
+                    <ul class="dropdown-menu text-center " style="width: fit-content !important; transform: scale(.9); margin-left: 0px !important;">
+                        <li style=" padding: 0px !important;"><a class="dropdown-item text-danger log_Out" href="#" id="out">Log Out</a></li>
+                    </ul>
+                </li>
+
+            </div>
+        </div>
+    </nav>
+
+    <div class="files">
+        <div class="container-fluid  d-flex " style="width: 95% !important;">
+            <div>
+                <h2 style="color: #2685fd;">New Word document</h2>
+                <a href="../../../word/index.html" id="term" class="hword mt-5"><i class="fa-solid fa-plus"></i></a>
+                <script>
+                    let addw=document.querySelector("#term")
+                    addw.addEventListener("click",clearCurrent);
+                    function clearCurrent(){
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/set_current.php", true);
+                        xhr.setRequestHeader("Content-Type", "application/json");
+                        xhr.send(JSON.stringify({}));
+
+                    }
+
+                </script>
+            </div>
+            <div class="ms-5">
+                <h2 class="excel" style="color: #107c41;">New Excel document</h2>
+                <a href="../../../Excel/index.html" class="hexcel mt-5"><i class="fa-solid fa-plus"></i></a>
+            </div>
+        </div>
+        <br><br>
+        <div style="width: 100%;">
+            <div id="cCarousel">
+                <div class="arrow ar1" id="prev"><i class="fa-solid fa-chevron-left"></i></div>
+                <div class="arrow ar2" id="next"><i class="fa-solid fa-chevron-right"></i></div>
+
+                <div id="carousel-vp" style="width: auto!important;">
+                    <div id="cCarousel-inner">
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <script>
+            const prev = document.querySelector("#prev");
+            const next = document.querySelector("#next");
+
+            let carouselVp = document.querySelector("#carousel-vp");
+
+            let cCarouselInner = document.querySelector("#cCarousel-inner");
+            let carouselInnerWidth = cCarouselInner.getBoundingClientRect().width;
+
+            let leftValue = 0;
+
+            // Variable used to set the carousel movement value (card's width + gap)
+            const totalMovementSize =
+                parseFloat(
+                    document.querySelector(".cCarousel-item").getBoundingClientRect().width,
+                    10
+                ) +
+                parseFloat(
+                    window.getComputedStyle(cCarouselInner).getPropertyValue("gap"),
+                    10
+                );
+
+            prev.addEventListener("click", () => {
+                if (!leftValue == 0) {
+                    leftValue -= -totalMovementSize;
+                    cCarouselInner.style.left = leftValue + "px";
+                }
+            });
+
+            next.addEventListener("click", () => {
+                const carouselVpWidth = carouselVp.getBoundingClientRect().width;
+                if (carouselInnerWidth - Math.abs(leftValue) > carouselVpWidth) {
+                    leftValue -= totalMovementSize;
+                    cCarouselInner.style.left = leftValue + "px";
+                }
+            });
+
+            const mediaQuery510 = window.matchMedia("(max-width: 510px)");
+            const mediaQuery770 = window.matchMedia("(max-width: 770px)");
+
+            mediaQuery510.addEventListener("change", mediaManagement);
+            mediaQuery770.addEventListener("change", mediaManagement);
+
+            let oldViewportWidth = window.innerWidth;
+
+            function mediaManagement() {
+                const newViewportWidth = window.innerWidth;
+
+                if (leftValue <= -totalMovementSize && oldViewportWidth < newViewportWidth) {
+                    leftValue += totalMovementSize;
+                    cCarouselInner.style.left = leftValue + "px";
+                    oldViewportWidth = newViewportWidth;
+                } else if (
+                    leftValue <= -totalMovementSize &&
+                    oldViewportWidth > newViewportWidth
+                ) {
+                    leftValue -= totalMovementSize;
+                    cCarouselInner.style.left = leftValue + "px";
+                    oldViewportWidth = newViewportWidth;
+                }
+            }
+
+        </script>
+
+
+
+
+
+
+
+
+        <div class="container-fluid d-flex flex-wrap  "
+            style="background-color: white; width: 95% !important; border-radius: 15px; box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;">
+
+        </div>
+
+    </div>
+      <div id="containerd" class="containerd">
+            <div class="containerdd ">
+                <div class="new_Ww">
+                    <img src="../../images/LogoMakr-5ezGBx.png"  style=" margin-left: 50%; transform: translateX(-50%); margin-top: 0px; margin-bottom: 10px !important;"  alt="">
+                    <form class="form mt-3" action="">
+                        <div class="d-flex flex-column gap-2 mt-3">
+                        <input class="w-75 rounded-4 m-auto p-2 name inputs form-control mb-1 " placeholder="Name" type="text" required id="name" >
+                        <div class=" text-center errorr text-danger small mx-5  " style="font-size: 13px ; display: none;">*Please start with capital latter and Name must be between 3-13 chars</div>
+                        <input type="date" class="w-75 rounded-4 m-auto p-2 form-control " id="birthday" name="birthday" required id="birthday">
+
+                        <input class="w-75 rounded-4 m-auto p-2 job form-control" placeholder="Job" type="text" required id="job">
+                        <div class=" text-center errorr_ text-danger small mx-5  " style="font-size: 10px ; display: none;">*Please start with capital latter and JOB must be between 5-25 chars</div>
+
+                        <input class="w-75 rounded-4 m-auto p-2 mobi form-control" placeholder="Mobile Number" type="number" required id="mobile">
+                        <div class=" text-center errorr__ text-danger small mx-5  " style="font-size: 10px ; display: none;">*Mobile Number must be between 10-13 Numbre</div>
+                    </div>
+                        <input type="submit"  id="btn_close" disabled class=" btm btn btn-dark" value="Done"></input>
+                    </form>
+                </div>
+            </div>
+
+    </div>
+<script>
+    const sliderContainer = document.querySelector("#cCarousel-inner");
+    let cardIndex = 1;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/cards.php", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(JSON.stringify({}));
+    xhr.onreadystatechange = function (event) {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            console.log(xhr.responseText);
+            let response = xhr.responseText;
+            let docs = response.split(",");
+
+            for (let i = 0; i < docs.length; i++) {
+                let doc = docs[i];
+                if (doc.trim() === '') {
+                    continue; // Skip empty doc
+                }
+                let cardData = doc.split('~').map(item => item.trim());
+                let newCard = document.createElement('article');
+                newCard.classList.add('cCarousel-item');
+                newCard.innerHTML = `
+        <img src="https://firebasestorage.googleapis.com/v0/b/all-in-one-aio.appspot.com/o/Untitled%20design%20(2).png?alt=media&token=b368484c-ac65-41ce-a17e-7a63296c1eff" alt="Moon">
+        <div class="infos">
+          <h3>${cardData[0]}</h3>
+          <button id="card-button${cardData[1]}" type="button">View</button>
+        </div>
+      `;
+
+                let script = document.createElement('script');
+                script.textContent = `
+        let button${cardData[1]} = document.querySelector('#card-button${cardData[1]}');
+        button${cardData[1]}.addEventListener('click', () => {
+       let xhr1 = new XMLHttpRequest();
+    xhr1.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/current_doc.php", true);
+    xhr1.setRequestHeader("Content-Type", "application/json");
+    xhr1.send(JSON.stringify({"doc_id":'${cardData[1]}'}));
+    xhr1.onreadystatechange = function (event) {
+     if(xhr1.readyState === XMLHttpRequest.DONE){
+     console.log(xhr1.responseText);
+     window.location.href="http://localhost:6464/AIO/All%20in%20One/word/index.html";
+     }
+    }
+        });
+      `;
+
+                newCard.appendChild(script);
+                sliderContainer.appendChild(newCard);
+                sliderContainer.style.width = `${cardIndex * 310}px`;
+
+                cardIndex++;
+            }
+        }
+    };
+
+</script>
+    <script src="../../../vendor/js/sweetalert2.min.js "></script>
+    <script src="../../js/js_start.js"></script>
+    <script src="../../../vendor/js/bootstrap.bundle.min.js"></script> <!-- bootstrap JS -->
+    <script>
+        let loading = document.querySelector('.loadere')
+        document.body.style.overflowY = 'hidden'
+        window.addEventListener('load', function () {
+            this.setTimeout(function () {
+                loading.style.opacity = '0';
+                loading.style.transition = '1s'
+                loading.style.visibility = 'hidden'
+                document.body.style.overflowY = 'visible'
+            }, 2000)
+        })
+    </script>
+    </script>
+
+</body>
+
+</html>

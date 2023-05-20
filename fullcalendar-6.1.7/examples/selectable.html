@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset='utf-8' />
+    <script src='../dist/index.global.js'></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/datebook@8.0.0/dist/datebook.min.js"></script>
+
+    <script>
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const calendarEl = document.getElementById('calendar');
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+
+                initialDate: convertDateFormat(new Date()),
+                navLinks: true,
+                selectable: true,
+                selectMirror: true,
+                select: function (arg) {
+                    Swal.fire({
+                        title: 'Enter event title',
+                        input: 'text',
+                        inputPlaceholder: 'Event title goes here',
+                        showCancelButton: true,
+                        confirmButtonText: 'Add',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            const title = result.value;
+                            if (title) {
+                                calendar.addEvent({
+                                    title: title,
+                                    start: arg.start,
+                                    end: arg.end,
+                                    allDay: arg.allDay
+                                });
+                                let xhr = new XMLHttpRequest();
+                                xhr.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/calendar.php", true);
+                                xhr.setRequestHeader("Content-Type", "application/json");
+                                xhr.send(JSON.stringify({
+                                    "title": title,
+                                    "type": "new",
+                                    "end": arg.end,
+                                    "start": arg.start,
+                                    "all": arg.allDay ? 1 : 0
+                                }));
+                            }
+                        }
+                    });
+
+                    calendar.unselect()
+                },
+                eventChange: function (arg) {
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/calendar.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/json");
+                    xhr.send(JSON.stringify({
+                        "title": arg.event.title,
+                        "type": "update",
+                        "end": arg.event.end,
+                        "start": arg.event.start,
+                        "all": arg.allDay ? 1 : 0
+                    }));
+
+                },
+
+
+                eventClick: function (arg) {
+                    Swal.fire({
+                        title: 'Are you sure you want to delete this event?',
+                        showCancelButton: true,
+                        confirmButtonText: 'Delete',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            let xhr = new XMLHttpRequest();
+                            xhr.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/calendar.php", true);
+                            xhr.setRequestHeader("Content-Type", "application/json");
+                            xhr.send(JSON.stringify({
+                                title: arg.event.title,
+                                type: "del",
+                                end: arg.event.end,
+                                start: arg.event.start
+                            }));
+                            arg.event.remove();
+                            Swal.fire('Deleted', '', 'success')
+                        }
+                    })
+                },
+                editable: true,
+                dayMaxEvents: true,
+
+            });
+            let xhr1 = new XMLHttpRequest();
+            xhr1.open("POST", "http://localhost:6464/AIO/All%20in%20One/server_files/php/calendar.php", true);
+            xhr1.setRequestHeader("Content-Type", "application/json");
+            xhr1.send(JSON.stringify({ 'type': "fetch" }));
+            xhr1.onreadystatechange = function () {
+                if (xhr1.readyState === XMLHttpRequest.DONE)
+
+                    for (const eventt of xhr1.responseText.split('/*')) {
+                        if (!eventt)
+                            break;
+
+                        const [title, startIso, endIso, allDay] = eventt.split(',');
+
+
+                        calendar.addEvent({
+                            title: title,
+                            start: startIso,
+                            end: endIso,
+                            allDay: allDay != 0
+                        });
+                    }
+
+            }
+            calendar.render();
+        });
+
+        function convertDateFormat(dateString) {
+            const date = new Date(dateString);
+            const year = date.getFullYear();
+            const month = ("0" + (date.getMonth() + 1)).slice(-2);
+            const day = ("0" + date.getDate()).slice(-2);
+            return `${year}-${month}-${day}`;
+        }
+
+
+    </script>
+    <style>
+        body {
+            margin: 40px 10px;
+            padding: 0;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 14px;
+            background: url(../../aseets/images/calendar-page-close-up-blue-background-business-planning-appointment-meeting-concept_293060-976.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        #calendar {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+    </style>
+    <style>
+        .fc-toolbar-chunk {
+            color: #fdfdfd !important;
+        }
+
+        .fc .fc-toolbar.fc-header-toolbar {
+            border-radius: 15px !important;
+            font-size: 17px !important;
+        }
+
+        .fc-toolbar-chunk button {
+
+            color: #2685FD !important;
+            background-color: #fdfdfd !important;
+            border: 2.2px solid #2685FD !important;
+            outline: none !important;
+        }
+
+        .fc-toolbar-chunk button:focus {
+            border: none !important;
+        }
+
+        .fc-toolbar-chunk button::after {
+            content: " " !important;
+        }
+
+        .fc-toolbar-chunk button::before {
+            content: " " !important;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* style for the thumb */
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-thumb-color, #2685FD);
+            border-radius: 10px;
+        }
+        .fc .fc-view-harness{
+            background-color: #fdfdfd !important;
+            border-radius: 15px !important;
+            color: #2685FD !important;
+            font-size: 14px !important; 
+        }
+    </style>
+    <title>Calendar</title>
+    <link rel="website icon" type="png" href="../../aseets/images/LogoMakr-dd-fotor-bg-remover-20230513153029.png">
+</head>
+
+<body>
+
+    <div id='calendar'></div>
+
+</body>
+
+</html>

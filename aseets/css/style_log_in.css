@@ -1,0 +1,136 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #000;
+    overflow: hidden !important;
+  }
+  section{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    flex-wrap: wrap;
+  }
+  section::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(#000,#2685FD,#000);
+    animation: animate 5s linear infinite;
+  }
+  @keyframes animate{
+    0%{
+      transform: translateY(-100%);
+    }
+    100%{
+      transform: translateY(100%);
+    }
+  }
+  section span{
+    position: relative;
+    display: block;
+    width: calc(6.25vw - 2px);
+    height: calc(6.25vw - 2px);
+    background-color: #181818;
+    z-index: 2;
+    transition: 1.5s;
+  }
+  section span:hover{
+    background-color: #2685FD;
+    transition: 0s;
+  }
+  section .signin{
+    position: absolute;
+    width: 400px;
+    background: #222;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.5);
+  }
+  section .signin .content{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  section .signin .content h2{
+    font-size: 2em;
+    color: #2685FD;
+    text-transform: uppercase;
+  }
+  
+  section .signin .content .form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+  section .signin .content .inbox{
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 25px;
+  }
+  section .signin .content .inbox img{
+    width: 20% !important;
+    position: relative;
+    background-color: #333;
+    border: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1em;
+    padding: 18px 0 18px 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  section .signin .content .inbox input{
+    border-radius: 10px;
+    position: relative;
+    width: 120%;
+    background-color: #333;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-weight: 500;
+    font-size: 1.2em;
+    padding: 18px 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    cursor: pointer;
+  }
+
+@media (max-width: 900px){
+  section span{
+    width: calc(10vw - 2px);
+    height: calc(10vw - 2px);
+  }
+}
+@media (max-width: 600px){
+  section span{
+    width: calc(20vw - 2px);
+    height: calc(20vw - 2px);
+  }
+}

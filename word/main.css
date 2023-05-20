@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Bruno+Ace&display=swap');
+
+.tox .tox-notification--warning {
+display: none !important;
+}
+.tox .tox-statusbar a{
+    display: none !important;
+}
+.tox .tox-statusbar {
+    background-color: #2685fd !important;
+    color: white !important;
+    font-size: 16px !important;
+    height: 30px !important;
+}
+.tox:not([dir=rtl]) .tox-statusbar__path>* {
+    color: white !important;
+    font-size: 16px !important;
+}
+.tox .tox-statusbar__wordcount {
+    color: white !important;
+}
+.tox:not(.tox-tinymce-inline) .tox-editor-header:not(.tox-editor-dock-transition) {
+    background-color: #2685fd !important;
+}
+.tox .tox-menubar{
+    background-color: #2685fd !important;
+}
+.tox .tox-toolbar-overlord .tox-toolbar__primary{
+    margin-top: -3px !important;
+    background-color: #2685fd !important;
+    border: none !important;
+}
+.tox:not(.tox-tinymce-inline) .tox-editor-header{
+    padding: 0% !important;
+}
+.tox-tinymce{
+    height: 100vh !important;
+}

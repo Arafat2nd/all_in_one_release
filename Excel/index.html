@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Excel</title>
+<link rel="stylesheet" href="cust.css">
+<link rel="website icon" type="png" href="../aseets/images/LogoMakr-dd-fotor-bg-remover-20230513153029.png">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="xtab.js"></script>
+<link rel="stylesheet" href="xtab.css"/>
+<style type="text/css" media="screen">
+html, body { background-color : white; color : black; font-family :  Arial, Verdana, Helvetica; }
+p,a,ul,li,td,th { font-size : 12pt; }
+h1 { font-size : 16pt; }
+h2 { font-size : 14pt; }
+button { margin: 5px; }
+       
+.loader {
+    animation: rotate 1s infinite;
+    height: 50px;
+    width: 50px;
+    transform: scale(1.4) !important;
+}
+
+.loader:before,
+.loader:after {
+    content: "";
+    display: block;
+    height: 20px;
+    width: 20px;
+}
+
+.loader:before {
+    animation: box1 1s infinite;
+    background-color: #fff;
+    box-shadow: 30px 0 0 #ff3d00;
+    margin-bottom: 10px;
+}
+
+.loader:after {
+    animation: box2 1s infinite;
+    background-color: #ff3d00;
+    box-shadow: 30px 0 0 #fff;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg) scale(0.8)
+    }
+
+    50% {
+        transform: rotate(360deg) scale(1.2)
+    }
+
+    100% {
+        transform: rotate(720deg) scale(0.8);
+    }
+}
+
+@keyframes box1 {
+    0% {
+        box-shadow: 30px 0 0 #ff3d00;
+    }
+
+    50% {
+        box-shadow: 0 0 0 #ff3d00;
+        margin-bottom: 0;
+        transform: translate(15px, 15px);
+    }
+
+    100% {
+        box-shadow: 30px 0 0 #ff3d00;
+        margin-bottom: 10px;
+    }
+}
+
+@keyframes box2 {
+    0% {
+        box-shadow: 30px 0 0 #fff;
+    }
+
+    50% {
+        box-shadow: 0 0 0 #fff;
+        margin-top: -20px;
+        transform: translate(15px, 15px);
+    }
+
+    100% {
+        box-shadow: 30px 0 0 #fff;
+        margin-top: 0;
+    }
+}
+
+.loadere {
+    margin-top: -50px;
+    position: fixed;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    z-index: 9000;
+    background: url(../aseets/images/SpaceBg.gif);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+button{
+    background-color: #fdfdfd;
+    text-align: center;
+    padding: 10px;
+    border-radius: 15px;
+    color: #107C41;
+    font-size: 16px;
+    border: none;
+}
+</style>
+<script type="text/javascript">
+	
+	$(document).ready(function() {
+
+var t = $("#t1");
+// Example
+t.xtab("init", {
+	mainlabel: "test",
+	split: true,
+	rows: 5,
+	cols: 5,
+	rowlabels: true,
+	collabels: true,
+	widths: [75, 50, 100, 200],
+	values: [
+		["a1", "b1", "c1", "d1"],
+		[1, 2, 3, 4],
+		[1.1, 1.2, 1.3, 1.4],
+		[true, false, true, false]
+	],
+	change: function(r, c, val, ref) {
+		console.log("CHANGE [" + r + ", " + c + "] = \"" + ref + "\": " + val);
+	},
+	focus: function(r, c, val, ref) {
+		console.log("FOCUS [" + r + ", " + c + "] = \"" + ref + "\": " + val);
+	}
+});
+t.xtab("color", "A3", "lightblue");
+$("#b2").click(function() {
+	console.log(t.xtab("val"));
+});
+$("#b3").click(function() {
+	console.log(t.xtab("val", 0, 1));
+});
+$("#b4").click(function() {
+	console.log(t.xtab("val", "B3"));
+});
+$("#b5").click(function() {
+	t.xtab("val", 1, 2, "value 1");
+});
+$("#b6").click(function() {
+	t.xtab("val", "D2", {
+		value: "value 2",
+		readonly: true,
+		color: "green"
+	});
+});
+$("#b7").click(function() {
+	t.xtab("readonly", "D2", !t.xtab("readonly", "D2"));
+	t.xtab("val", "D2", parseInt(t.xtab("val", "D2")) + 1);
+});
+
+// Access xTab value after initialization
+console.log(t.xtab("val"));
+});
+
+
+	// Another example using functions
+	/*$("#t2").xtab("init", {
+		rows: 8, cols: 8,
+		width: 600;
+		widths: function(c) { return 100 + c*10; },
+		rowlabels: function(r) { return "row " + r; },
+		collabels: function(c) {
+			if (c%2 == 0) {
+				var th = $("<th/>", { colspan: 2 }).append("col " + c);
+				if (c%4 == 0) th.attr("style", "background: red; color: white;");
+				return th;
+			}
+		},
+		values: function(r, c) {
+			var v = "val " + r + ',' + c
+			return c%2 == 0 ? v : { value: v, readonly: r%2 != 0, color: (r%2 == 0 ? "green" : undefined) };
+		}
+	});*/
+
+</script>
+    <link rel="stylesheet" href="vendor/css/all.min.css">
+</head>
+<div class="loadere">
+    <span class="loader"></span>
+    <div style="margin-left: 15px; font-size: 45px; color: white; font-family: 'Bruno Ace', cursive;">ALL <b style="color: #ff3d00; font-size: 33px;">in</b> ONE</div>
+</div>
+
+
+<body style="margin: 0px; padding: 0; overflow: scroll !important;">
+    <div class="buttons " style="width: 100% !important; display: flex; justify-content: center; margin-top: 0px; flex-wrap: wrap; position: fixed; top: 0 !important; background-color: #107C41; ">
+        <button>Font Size <i class="fa-solid fa-arrow-down"></i></button>
+        <button>Text-Align <i class="fa-solid fa-align-center"></i></button>
+        <button>Font Color <i class="fa-solid fa-fill"></i></button>
+        <button>Background Color <i class="fa-solid fa-paint-roller"></i></button>
+        <button>Table  <i class="fa-solid fa-table"></i></button>
+        <button>Function <i class="fa-solid fa-calculator"></i></button>
+        <button>Cut <i class="fa-solid fa-calculator"></i><i class="fa-solid fa-calculator"></i></button>
+        <button>Copy <i class="fa-solid fa-calculator"></i></button>
+        <button>Pste <i class="fa-solid fa-paste"></i></button>
+        <button>Bold <i class="fa-solid fa-bold"></i></button>
+        <button>Italic <i class="fa-solid fa-italic"></i></button>
+        <button>Save <i class="fa-solid fa-floppy-disk"></i></button>
+        
+    </div>
+
+<div id="demo" style="overflow: scroll !important; margin-top: 50px !important;">
+
+</div>
+
+<!-- <div id="t1"></div>
+<button id="b2">Get all values</button>&nbsp;
+<button id="b3">Get value at [0,1] = "B1"</button>&nbsp;
+<button id="b4">Get value at "B3"</button>&nbsp;
+<button id="b5">Set value at [1,2] = "C2"</button>&nbsp;
+<button id="b6">Set value and properties at "D2"</button>&nbsp;
+<button id="b7">Increase value at "D2" (and toggle it readonly)</button>&nbsp;
+<br/>See console for values...
+<div id="t2"></div> -->
+<script>
+	let loading=document.querySelector('.loadere')
+        document.body.style.overflow='hidden'
+        window.addEventListener('load',function(){
+        this.setTimeout(function(){
+        loading.style.opacity='0';
+        loading.style.transition='1s'
+        loading.style.visibility='hidden'
+        document.body.style.overflow='visible'
+        },2000)
+})
+</script>
+<script src="vendor/js/main.js"></script>
+</body>
+</html>
